@@ -1,11 +1,11 @@
 import React from "react";
 import { Text, View, ScrollView, StyleSheet } from "react-native";
 
-const Note = props => {
+const Note = ({ note }) => {
     return (
         <View style={styles.noteView}>
             <ScrollView alwaysBounceVertical={false}>
-            <Text>{props.note.content}</Text>
+                <Text>{note.content}</Text>
             </ScrollView>
         </View>
     );

@@ -1,11 +1,10 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+import NoteFeed from '../components/NoteFeed';
 
 const Feed = () => {
     return (
-        <View style={styles.container}>
-            <Text>Feed</Text>
-        </View>
+        <NoteFeed />
     );
 }
 
