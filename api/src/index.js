@@ -9,7 +9,7 @@ const { connections } = require('mongoose');
 const jwt = require('jsonwebtoken');
 // Helmet middle ware has security-minded middleware functions
 // helps the application from common web vulnerabilitis
-const helmet = require('helmet');
+// const helmet = require('helmet');
 // CORS Cross-Origin Resource Sharing
 const cors = require('cors');
 // limit the query complexity
@@ -37,7 +37,7 @@ db.connect(DB_HOST);
 // Luodaan expressin app-olio
 const app = express();
 // otetaan helmet käyttöön
-app.use(helmet());
+// app.use(helmet());
 app.use(cors());
 
 // verify the validity of the token:
