@@ -9,14 +9,21 @@ import Favorites from "./favorites";
 import MyNotes from "./mynotes";
 import Note from "./note";
 
+import AuthLoading from './authloading';
+import SignIn from './signin';
+import SignUp from './signup';
+import Settings from './settings';
+
 const Tab = createBottomTabNavigator();
 const FeedStack = createStackNavigator();
 const AuthenticationStack = createStackNavigator();
 const SettingsStack = createStackNavigator();
 
-//const checkLoginState = async () => {
-//    return await SecureStore.getItemAsync('token');
-//};
+const isSigned = true;
+
+const checkLoginState = async () => {
+    return await SecureStore.getItemAsync('token');
+};
 
 const FeedStackScreen = () => {
     return (
@@ -30,7 +37,7 @@ const FeedStackScreen = () => {
 const SettingsStackScreen = () => {
     return (
         <SettingsStack.Navigator>
-            <SettingsStack.Screen name="Settings" comment={Settings} />
+            <SettingsStack.Screen name="SettingsS" comment={Settings} options={{title: 'Logout'}} />
         </SettingsStack.Navigator>
     );
 }
@@ -38,12 +45,12 @@ const SettingsStackScreen = () => {
 function UnAuthenticatedScreens() {
     return (
         <AuthenticationStack.Navigator initialRouteName="AuthLoading">
-            <AuthenticationStack.Screen name= "SignIn" component={}
+            <AuthenticationStack.Screen name= "SignIn" component={SignIn} options = {{ title: 'Sign In'}} />
         </AuthenticationStack.Navigator>
     )
 }
 
-export default function Screens() {
+function AuthenticatedScreens() {
     return (
         <Tab.Navigator initialRouteName='Feed'>
             <Tab.Screen name="Feed"
@@ -79,6 +86,19 @@ export default function Screens() {
                                 )
                         }}
             />
+            <Tab.Screen name="Settings"
+                        component={Settings}
+                        options={{title: 'Logout',
+                            tabBarIcon: ({ tintColor }) => (
+                            <MaterialCommunityIcons name="settings"
+                                                    size={24}
+                                                    color={tintColor}
+                            />
+                            )
+                    }}
+            />
         </Tab.Navigator>
     );
-}
+};
+
+export default checkLoginState() ? AuthenticatedScreens : UnAuthenticatedScreens;
